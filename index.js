@@ -7,7 +7,13 @@ dotenv.config()
 
 //ROUTES
 const userRoute = require('./routes/user')
+const ProductRoute = require('./routes/user')
+const CartRoute = require('./routes/user')
+const OrderRoute = require('./routes/user')
 
+app.use('/api/users', userRoute);
+app.use('/api/users', userRoute);
+app.use('/api/users', userRoute);
 app.use('/api/users', userRoute);
 // CONNECT TO DATABASE
 mongoose.connect(process.env.MONGO_URL).then(() => {
