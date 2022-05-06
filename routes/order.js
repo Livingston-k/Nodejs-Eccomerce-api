@@ -1,7 +1,7 @@
 router = require("express").Router()
 
-router.get('/user_test', (req, res) => {
-    res.send("User test is successfull")
+router.get('/', (req, res) => {
+    res.send("Orders")
 })
 
 module.exports = router
