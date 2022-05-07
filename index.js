@@ -5,25 +5,26 @@ const mongoose = require('mongoose')
 const dotenv = require("dotenv")
 dotenv.config()
 
-//ROUTES
+//IMPORT ROUTES
 const userRoute = require('./routes/user')
 const ProductRoute = require('./routes/user')
 const CartRoute = require('./routes/user')
 const OrderRoute = require('./routes/user')
+const AuthRoute = require('./routes/user')
 
+//ROUTES URL
 app.use('/api/users', userRoute);
-app.use('/api/users', userRoute);
-app.use('/api/users', userRoute);
-app.use('/api/users', userRoute);
+app.use('/api/products', ProductRoute);
+app.use('/api/carts', CartRoute);
+app.use('/api/orders', OrderRoute);
+app.use('/api/auth', AuthRoute);
+
 // CONNECT TO DATABASE
 mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log('Database connection successfull')
 }).catch(() => {
     console.log('Error connecting to database')
 })
-
-// ROUTES
-
 
 // LISTENING PORT
 app.listen(process.env.port || 5000, () => {
