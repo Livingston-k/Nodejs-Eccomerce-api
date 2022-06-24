@@ -2,6 +2,8 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
 const dotenv = require("dotenv")
 dotenv.config()
 
@@ -13,6 +15,7 @@ const OrderRoute = require('./routes/user')
 const AuthRoute = require('./routes/user')
 
 //ROUTES URL
+
 app.use('/api/users', userRoute);
 app.use('/api/products', ProductRoute);
 app.use('/api/carts', CartRoute);
@@ -27,6 +30,6 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 })
 
 // LISTENING PORT
-app.listen(process.env.port || 5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("App listening at port 5000")
 })

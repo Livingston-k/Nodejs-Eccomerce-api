@@ -1,7 +1,7 @@
-const router = require("express").Router()
-const User = require("../models/User")
+const router = require("express").Router();
+const User = require("../models/User");
 
-router.post('/register', async(req, res) => {
+router.post('/register', async (req, res) => {
 
     if (!req.body.username || !req.body.username || !req.body.username) {
         res.status(224).json({
@@ -20,5 +20,6 @@ router.post('/register', async(req, res) => {
         res.status(224).json(error)
     }
 })
+
 
 module.exports = router
