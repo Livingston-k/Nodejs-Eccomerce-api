@@ -16,4 +16,4 @@ CartSchema = mongoose.Schema({
     }
 }, { timestamp: true });
 
-modules.exports = mongoose.model('Cart', CartSchema)
+module.exports = mongoose.model('Cart', CartSchema)

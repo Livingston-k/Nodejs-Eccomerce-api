@@ -5,9 +5,9 @@ router.get('/users', (req, res) => {
 })
 
 router.post('/save_user', (req, res) => {
-    let name = req.body.name;
+    let name = req.body;
     console.log(name)
-    res.send("Your name is " + name);
+    // res.send("Your name is " + name);
 })
 
 

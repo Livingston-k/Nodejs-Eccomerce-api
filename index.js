@@ -9,11 +9,10 @@ dotenv.config()
 
 //IMPORT ROUTES
 const userRoute = require('./routes/user')
-const ProductRoute = require('./routes/user')
-const CartRoute = require('./routes/user')
-const OrderRoute = require('./routes/user')
-const AuthRoute = require('./routes/user')
-
+const ProductRoute = require('./routes/product')
+const CartRoute = require('./routes/cart')
+const OrderRoute = require('./routes/order')
+const AuthRoute = require('./routes/auth')
 //ROUTES URL
 
 app.use('/api/users', userRoute);
