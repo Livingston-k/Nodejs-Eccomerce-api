@@ -8,4 +8,5 @@ UserSchema = mongoose.Schema({
         default: false
     }
 }, { timestamp: true });
-modules.exports = mongoose.model('User', UserSchema)
+
+module.exports = mongoose.model('User', UserSchema)

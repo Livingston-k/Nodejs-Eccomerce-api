@@ -15,4 +15,4 @@ OrderSchema = mongoose.Schema({
     status: { type: String, default: 'Pending' },
 }, { timestamp: true });
 
-modules.exports = mongoose.model('Order', OrderSchema)
+module.exports = mongoose.model('Order', OrderSchema)

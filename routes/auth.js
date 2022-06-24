@@ -1,23 +1,31 @@
-const router = require("express").Router();
-const User = require("../models/User");
+router = require("express").Router()
+const User = require("../models/User")
+const CryptoJS = require('crypto-js')
 
 router.post('/register', async (req, res) => {
-
-    if (!req.body.username || !req.body.username || !req.body.username) {
-        res.status(224).json({
-            msg: "Fill all fields"
-        })
+    // VALIDATE
+    if (req.body.username == "") {
+        res.status(424).json({ 'msg': 'Please enter user name ', });
     }
-    const newUser = new User({
+    if (req.body.email == "") {
+        res.status(424).json({ 'msg': 'Please enter email address ', });
+    }
+    if (req.body.password == "") {
+        res.status(424).json({ 'msg': 'Please enter password', });
+    }
+    // RECIEVE USER INPUTS
+    const new_user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password,
-    })
+        password: CryptoJS.AES.encrypt(req.body.password, process.env.SECRET_PASSPHASE),
+    });
+    // SAVE USER
     try {
-        const savedUser = await newUser.save()
-        res.status(200).json(savedUser)
+        const savedUser = await new_user.save()
+        res.status(200).json({ 'msg': 'User registered successfully ', user: savedUser });
     } catch (error) {
-        res.status(224).json(error)
+        res.status(424).json({ 'msg': 'Error registering User ', error: error });
+
     }
 })
 
