@@ -13,8 +13,8 @@ const ProductRoute = require('./routes/product')
 const CartRoute = require('./routes/cart')
 const OrderRoute = require('./routes/order')
 const AuthRoute = require('./routes/auth')
-//ROUTES URL
 
+// CONFIGURE ROUTES URLS
 app.use('/api/users', userRoute);
 app.use('/api/products', ProductRoute);
 app.use('/api/carts', CartRoute);

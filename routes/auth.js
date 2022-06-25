@@ -2,6 +2,7 @@ router = require("express").Router()
 const User = require("../models/User")
 const CryptoJS = require('crypto-js')
 const jwt = require("jsonwebtoken")
+const { verifyTokenAndAuthorization } = require('../middleware/middlewareFunctions')
 
 // REGISTER API
 router.post('/register', async (req, res) => {
@@ -31,7 +32,7 @@ router.post('/register', async (req, res) => {
 })
 
 // LOGIN API
-router.post('/login', async (req, res) => {
+router.post('/login', verifyTokenAndAuthorization, async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username });
         !user && res.status(404).json({ msg: "Wrong credentials" })
