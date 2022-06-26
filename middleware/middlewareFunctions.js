@@ -23,5 +23,15 @@ const verifyTokenAndAuthorization = (req, res, next) => {
         }
     })
 }
-module.exports = { verifyToken, verifyTokenAndAuthorization }
+
+const verifyTokenAndAdmin = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (true) {
+            next()
+        } else {
+            res.status(403).json({ 'msg': 'You have no admin permissions t o perform this action' })
+        }
+    })
+}
+module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin }
 

@@ -1,7 +1,7 @@
 router = require("express").Router()
 const CryptoJS = require('crypto-js')
 const User = require("../models/User")
-const { verifyTokenAndAuthorization } = require('../middleware/middlewareFunctions')
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/middlewareFunctions')
 
 router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
     // VALIDATE
@@ -26,6 +26,26 @@ router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ 'error': error, 'msg': 'Error updating user' })
+    }
+})
+
+router.get('/find/:id', verifyTokenAndAdmin, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+        res.status(200).json(user)
+
+    } catch (error) {
+        res.status(500).json({ 'error': error, 'msg': 'Error finding user' })
+    }
+})
+
+router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(200).json({ 'msg': 'User deleted successfully' })
+
+    } catch (error) {
+        res.status(500).json({ 'error': error, 'msg': 'Error deleting user' })
     }
 })
 
