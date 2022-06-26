@@ -1,7 +1,17 @@
 router = require("express").Router()
 const CryptoJS = require('crypto-js')
 const User = require("../models/User")
-const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/middlewareFunctions')
+const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/middlewareFunctions')
+
+router.get('/', verifyToken, async (req, res) => {
+    const query = req.query.new
+    try {
+        const user = query ? await User.find().sort({ _id: -1 }).limit(5) : await User.find()
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(500).json({ 'error': error, 'msg': 'Error finding users' })
+    }
+})
 
 router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
     // VALIDATE
@@ -29,10 +39,11 @@ router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
     }
 })
 
-router.get('/find/:id', verifyTokenAndAdmin, async (req, res) => {
+router.get('/find/:id', verifyToken, async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
-        res.status(200).json(user)
+        const { password, ...others } = user._doc;
+        res.status(200).json(others)
 
     } catch (error) {
         res.status(500).json({ 'error': error, 'msg': 'Error finding user' })
