@@ -26,7 +26,7 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 
 const verifyTokenAndAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
-        if (true) {
+        if (req.user.isAdmin) {
             next()
         } else {
             res.status(403).json({ 'msg': 'You have no admin permissions t o perform this action' })
